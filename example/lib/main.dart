@@ -37,36 +37,37 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final input = InternationalPhoneNumberInput(
+      onInputChanged: (PhoneNumber number) {
+        print(number.phoneNumber);
+      },
+      onInputValidated: (bool value) {
+        print(value);
+      },
+      selectorConfig: SelectorConfig(
+        selectorType: PhoneInputSelectorType.BOTTOM_SHEET,
+        useBottomSheetSafeArea: true,
+      ),
+      ignoreBlank: false,
+      autoValidateMode: AutovalidateMode.disabled,
+      selectorTextStyle: TextStyle(color: Colors.black),
+      initialValue: number,
+      textFieldController: controller,
+      formatInput: true,
+      keyboardType:
+          TextInputType.numberWithOptions(signed: true, decimal: true),
+      inputBorder: OutlineInputBorder(),
+      onSaved: (PhoneNumber number) {
+        print('On Saved: $number');
+      },
+    );
     return Form(
       key: formKey,
       child: Container(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            InternationalPhoneNumberInput(
-              onInputChanged: (PhoneNumber number) {
-                print(number.phoneNumber);
-              },
-              onInputValidated: (bool value) {
-                print(value);
-              },
-              selectorConfig: SelectorConfig(
-                selectorType: PhoneInputSelectorType.BOTTOM_SHEET,
-                useBottomSheetSafeArea: true,
-              ),
-              ignoreBlank: false,
-              autoValidateMode: AutovalidateMode.disabled,
-              selectorTextStyle: TextStyle(color: Colors.black),
-              initialValue: number,
-              textFieldController: controller,
-              formatInput: true,
-              keyboardType:
-                  TextInputType.numberWithOptions(signed: true, decimal: true),
-              inputBorder: OutlineInputBorder(),
-              onSaved: (PhoneNumber number) {
-                print('On Saved: $number');
-              },
-            ),
+            input,
             ElevatedButton(
               onPressed: () {
                 formKey.currentState?.validate();
@@ -84,6 +85,15 @@ class _MyHomePageState extends State<MyHomePage> {
                 formKey.currentState?.save();
               },
               child: Text('Save'),
+            ),
+            ElevatedButton(
+              onPressed: () async {
+                final selected = await input.selectorButton
+                    .showCountrySelectorBottomSheet(context);
+                if (selected == null) return;
+                input.onCountryChanged(selected);
+              },
+              child: Text('Show'),
             ),
           ],
         ),

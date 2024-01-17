@@ -50,7 +50,7 @@ class SelectorButton extends StatelessWidget {
                     textStyle: selectorTextStyle,
                   ),
                   value: country,
-                  items: mapCountryToDropdownItem(countries),
+                  items: mapCountryToDropdownItem(),
                   onChanged: isEnabled ? onCountryChanged : null,
                 ),
               )
@@ -71,11 +71,9 @@ class SelectorButton extends StatelessWidget {
                     Country? selected;
                     if (selectorConfig.selectorType ==
                         PhoneInputSelectorType.BOTTOM_SHEET) {
-                      selected = await showCountrySelectorBottomSheet(
-                          context, countries);
+                      selected = await showCountrySelectorBottomSheet(context);
                     } else {
-                      selected =
-                          await showCountrySelectorDialog(context, countries);
+                      selected = await showCountrySelectorDialog(context);
                     }
 
                     if (selected != null) {
@@ -98,8 +96,7 @@ class SelectorButton extends StatelessWidget {
   }
 
   /// Converts the list [countries] to `DropdownMenuItem`
-  List<DropdownMenuItem<Country>> mapCountryToDropdownItem(
-      List<Country> countries) {
+  List<DropdownMenuItem<Country>> mapCountryToDropdownItem() {
     return countries.map((country) {
       return DropdownMenuItem<Country>(
         value: country,
@@ -117,8 +114,7 @@ class SelectorButton extends StatelessWidget {
   }
 
   /// shows a Dialog with list [countries] if the [PhoneInputSelectorType.DIALOG] is selected
-  Future<Country?> showCountrySelectorDialog(
-      BuildContext inheritedContext, List<Country> countries) {
+  Future<Country?> showCountrySelectorDialog(BuildContext inheritedContext) {
     return showDialog(
       context: inheritedContext,
       barrierDismissible: true,
@@ -143,7 +139,7 @@ class SelectorButton extends StatelessWidget {
 
   /// shows a Dialog with list [countries] if the [PhoneInputSelectorType.BOTTOM_SHEET] is selected
   Future<Country?> showCountrySelectorBottomSheet(
-      BuildContext inheritedContext, List<Country> countries) {
+      BuildContext inheritedContext) {
     return showModalBottomSheet(
       context: inheritedContext,
       clipBehavior: Clip.hardEdge,
