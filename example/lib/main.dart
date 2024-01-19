@@ -50,7 +50,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       ignoreBlank: false,
       autoValidateMode: AutovalidateMode.disabled,
-      selectorTextStyle: TextStyle(color: Colors.black),
+      selectorTextStyle: TextStyle(height: 2),
       initialValue: number,
       textFieldController: controller,
       formatInput: true,
@@ -60,6 +60,7 @@ class _MyHomePageState extends State<MyHomePage> {
       onSaved: (PhoneNumber number) {
         print('On Saved: $number');
       },
+      textStyle: TextStyle(height: 2),
     );
     return Form(
       key: formKey,

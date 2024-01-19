@@ -62,19 +62,13 @@ class SelectorButton extends StatelessWidget {
                 trailingSpace: selectorConfig.trailingSpace,
                 textStyle: selectorTextStyle,
               )
-        : MaterialButton(
-            key: Key(TestHelper.DropdownButtonKeyValue),
-            padding: EdgeInsets.zero,
-            minWidth: 0,
-            onPressed: null,
-            child: Item(
-              country: country,
-              showFlag: false,
-              useEmoji: selectorConfig.useEmoji,
-              leadingPadding: selectorConfig.leadingPadding,
-              trailingSpace: selectorConfig.trailingSpace,
-              textStyle: selectorTextStyle,
-            ),
+        : Item(
+            country: country,
+            showFlag: false,
+            useEmoji: selectorConfig.useEmoji,
+            leadingPadding: selectorConfig.leadingPadding,
+            trailingSpace: selectorConfig.trailingSpace,
+            textStyle: selectorTextStyle,
           );
   }
 
