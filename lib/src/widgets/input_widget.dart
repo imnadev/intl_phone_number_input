@@ -294,22 +294,6 @@ class _InputWidgetState extends State<InternationalPhoneNumberInput> {
           hintText: widget.hintText,
         );
 
-    if (widget.selectorConfig.setSelectorButtonAsPrefixIcon) {
-      widget.selectorButton = SelectorButton(
-        country: country,
-        countries: countries,
-        onCountryChanged: onCountryChanged,
-        selectorConfig: widget.selectorConfig,
-        selectorTextStyle: widget.selectorTextStyle,
-        searchBoxDecoration: widget.searchBoxDecoration,
-        locale: locale,
-        isEnabled: widget.isEnabled,
-        autoFocusSearchField: widget.autoFocusSearch,
-        isScrollControlled: widget.countrySelectorScrollControlled,
-      );
-      return value.copyWith(prefixIcon: widget.selectorButton);
-    }
-
     return value;
   }
 
