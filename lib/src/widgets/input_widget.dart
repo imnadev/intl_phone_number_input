@@ -49,6 +49,7 @@ class InternationalPhoneNumberInput extends StatefulWidget {
   final Key? fieldKey;
   final TextEditingController? textFieldController;
   final TextInputType keyboardType;
+  final Brightness keyboardAppearance;
   final TextInputAction? keyboardAction;
 
   final PhoneNumber? initialValue;
@@ -102,6 +103,7 @@ class InternationalPhoneNumberInput extends StatefulWidget {
     this.textFieldController,
     this.keyboardAction,
     this.keyboardType = TextInputType.phone,
+    this.keyboardAppearance = Brightness.light,
     this.initialValue,
     this.hintText = 'Phone number',
     this.errorMessage = 'Invalid phone number',
@@ -434,6 +436,7 @@ class _InputWidgetView
               enabled: widget.isEnabled,
               autofocus: widget.autoFocus,
               keyboardType: widget.keyboardType,
+              keyboardAppearance: widget.keyboardAppearance,
               textInputAction: widget.keyboardAction,
               style: widget.textStyle,
               decoration: state.getInputDecoration(widget.inputDecoration),
